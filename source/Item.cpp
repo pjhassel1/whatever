@@ -5,7 +5,8 @@
 
 #include <vector>
 #include <string>
-#include "include/items.h"
+#include "../include/items.h"
+
 
 using std::string;
 using std::vector;
