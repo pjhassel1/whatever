@@ -98,6 +98,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\Item.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\items.h" />
+    <ClInclude Include="include\room.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
