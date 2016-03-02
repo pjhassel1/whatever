@@ -34,24 +34,29 @@ class Item
 {
 public:
 	Item();
-	Item(string name, string description, int encumberance, item_type type);
+	Item(const string &item_name, const string &item_description,
+	     const string &item_fail_msg, int item_encumberance,
+	     item_type itype);
 	~Item();
 
 	string use();
 	string use(Item direct_object);
 
-	void set_name(string name);
-	void set_description(string description);
-	void set_encumberance(string encumberance);
-	void set_item_type(item_type type);
+	void set_name(const string &item_name);
+	void set_description(const string &item_description);
+	void set_fail_message(const string &item_fail_msg);
+	void set_encumberance(int item_encumberance);
+	void set_item_type(item_type itype);
 
-	string get_name();
-	string get_description();
-	int get_encumberance;
-	item_type get_item_type();
+	string get_name() const;
+	string get_description() const;
+	string get_fail_message() const;
+	int get_encumberance const;
+	item_type get_item_type() const;
 protected:
 	string name;
 	string description;
+	string fail_message;
 	int encumberance;
 	item_type type;
 };
@@ -60,9 +65,9 @@ class Weapon : public Item
 {
 public:
 	Weapon();
-	Weapon(string name, string description, int encumberance,
-	       item_type type, weapon_type wtype, int damage,
-	       int clip_size);
+	Weapon(const string &wep_name, const string &wep_description,
+	       const string &wep_fail_msg, int wep_encumberance,
+	       weapon_type wep_type, int wep_damage, int wep_clip_size);
 private:
 	weapon_type wtype;
 	int damage;
