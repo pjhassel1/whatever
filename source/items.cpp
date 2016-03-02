@@ -79,31 +79,31 @@ Item::get_item_type() const
 /* Mutators */
 
 void
-set_name(const string &item_name)
+Item::set_name(const string &item_name)
 {
 	name = item_name;
 }
 
 void
-set_description(const string &item_description)
+Item::set_description(const string &item_description)
 {
 	description = item_description;
 }
 
 void
-set_fail_message(const string &item_fail_msg)
+Item::set_fail_message(const string &item_fail_msg)
 {
 	fail_message = item_fail_msg;
 }
 
 void
-set_encumberance(int item_encumberance)
+Item::set_encumberance(int item_encumberance)
 {
 	encumberance = item_encumberance;
 }
 
 void
-set_item_type(item_type itype)
+Item::set_item_type(item_type itype)
 {
 	type = itype;
 }
@@ -123,7 +123,7 @@ Weapon::Weapon() : Item()
 Weapon::Weapon(const string &wep_name, const string &wep_description,
 	       const string &wep_fail_msg, int wep_encumberance,
 	       weapon_type wep_type, int wep_damage, int wep_clip_size) :
-	Item(weapon_name, weapon_description, weapon_fail_msg, encumberance,
+	Item(wep_name, wep_description, wep_fail_msg, wep_encumberance,
 	     WEAPON),
 	wtype(wep_type), damage(wep_damage), clip_size(wep_clip_size)
 {

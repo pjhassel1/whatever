@@ -51,7 +51,7 @@ public:
 	string get_name() const;
 	string get_description() const;
 	string get_fail_message() const;
-	int get_encumberance const;
+	int get_encumberance() const;
 	item_type get_item_type() const;
 protected:
 	string name;
