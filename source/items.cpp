@@ -15,6 +15,7 @@ using std::vector;
  * Item Class *
  **************/
 
+/* Default constructor */
 Item::Item()
 {
 	name = "Uninitialized Item";
@@ -23,6 +24,7 @@ Item::Item()
 	type = TOOL;
 }
 
+/* Regular constructor */
 Item::Item(const string &item_name, const string &item_description,
 	   const string &item_fail_msg, int item_encumberance,
 	   item_type itype) :
@@ -30,6 +32,26 @@ Item::Item(const string &item_name, const string &item_description,
 	fail_message(item_fail_msg), encumberance(item_encumberance),
 	type(itype)
 {
+}
+
+/* Copy constructor */
+Item::Item(Item& rhs)
+{
+	name = rhs.name;
+	description = rhs.description;
+	fail_message = rhs.fail_message;
+	encumberance = rhs.encumberance;
+	type = rhs.type;
+}
+
+/* Move constructor */
+Item::Item(Item&& rhs)
+{
+	name = rhs.name;
+	description = rhs.description;
+	fail_message = rhs.fail_message;
+	encumberance = rhs.encumberance;
+	type = rhs.type;
 }
 
 string

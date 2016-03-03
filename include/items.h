@@ -37,6 +37,13 @@ public:
 	Item(const string &item_name, const string &item_description,
 	     const string &item_fail_msg, int item_encumberance,
 	     item_type itype);
+
+	/* Copy constructor */
+	Item(Item& rhs);
+	/* Move constructor */
+	Item(Item&& rhs);
+
+	/* Desctructor */
 	~Item();
 
 	string use();
