@@ -74,11 +74,13 @@ public:
 	Weapon();
 	Weapon(const string &wep_name, const string &wep_description,
 	       const string &wep_fail_msg, int wep_encumberance,
-	       weapon_type wep_type, int wep_damage, int wep_clip_size);
+	       weapon_type wep_type, int wep_damage, int wep_ammo_remaining);
+	Weapon(Weapon &rhs);
+	Weapon(Weapon &&rhs);
 private:
 	weapon_type wtype;
 	int damage;
-	int clip_size;
+	int ammo_remaining;
 };
 
 #endif /* _ITEMS_H */

@@ -139,14 +139,26 @@ Weapon::Weapon() : Item()
 	type = WEAPON;
 	wtype = PIERCING;
 	damage = 1;
-	clip_size = 0;
+	ammo_remaining = 0;
 }
 
 Weapon::Weapon(const string &wep_name, const string &wep_description,
 	       const string &wep_fail_msg, int wep_encumberance,
-	       weapon_type wep_type, int wep_damage, int wep_clip_size) :
+	       weapon_type wep_type, int wep_damage, int wep_ammo_remaining) :
 	Item(wep_name, wep_description, wep_fail_msg, wep_encumberance,
 	     WEAPON),
-	wtype(wep_type), damage(wep_damage), clip_size(wep_clip_size)
+	wtype(wep_type), damage(wep_damage), ammo_remaining(wep_ammo_remaining)
 {
+}
+
+Weapon::Weapon(Weapon &rhs)
+{
+	name = rhs.name;
+	description = rhs.description;
+	fail_message = rhs.fail_message;
+	encumberance = rhs.encumberance;
+	type = rhs.type;
+	wtype = rhs.wtype;
+	damage = rhs.damage;
+	ammo_remaining = rhs.ammo_remaining;
 }
