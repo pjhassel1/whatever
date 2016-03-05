@@ -20,39 +20,45 @@ Item::Item()
 {
 	name = "Uninitialized Item";
 	description = "This is an uninitialized object.";
+	fail_message = "You can't use that here.";
 	encumberance = 0;
 	type = TOOL;
+
+	item_num = Item::num_items;
+	Item::num_items++;
 }
 
 /* Regular constructor */
-Item::Item(const string &item_name, const string &item_description,
-	   const string &item_fail_msg, int item_encumberance,
-	   item_type itype) :
-	name(item_name), description(item_description),
-	fail_message(item_fail_msg), encumberance(item_encumberance),
-	type(itype)
+Item::Item(const string &item_name, item_type itype) :
+	name(item_name), type(itype)
 {
+	description = "It looks kind of thingish.";
+	fail_message = "You can't use that here.";
+	encumberance = 1;
+
+	item_num = Item::num_items;
+	Item::num_items++;
 }
 
 /* Copy constructor */
-Item::Item(Item& rhs)
-{
-	name = rhs.name;
-	description = rhs.description;
-	fail_message = rhs.fail_message;
-	encumberance = rhs.encumberance;
-	type = rhs.type;
-}
+// Item::Item(Item& rhs)
+// {
+// 	name = rhs.name;
+// 	description = rhs.description;
+// 	fail_message = rhs.fail_message;
+// 	encumberance = rhs.encumberance;
+// 	type = rhs.type;
+// }
 
 /* Move constructor */
-Item::Item(Item&& rhs)
-{
-	name = rhs.name;
-	description = rhs.description;
-	fail_message = rhs.fail_message;
-	encumberance = rhs.encumberance;
-	type = rhs.type;
-}
+// Item::Item(Item&& rhs)
+// {
+// 	name = rhs.name;
+// 	description = rhs.description;
+// 	fail_message = rhs.fail_message;
+// 	encumberance = rhs.encumberance;
+// 	type = rhs.type;
+// }
 
 string
 Item::use()
@@ -60,13 +66,19 @@ Item::use()
 	return fail_message;
 }
 
-string
-Item::use(Item direct_object)
+int
+Item::get_next_item_num()
 {
-	return fail_message;
+	return Item::num_items;
 }
 
 /* Accessors */
+
+int
+Item::get_item_num() const
+{
+	return item_num;
+}
 
 string
 Item::get_name() const
@@ -119,13 +131,13 @@ Item::set_fail_message(const string &item_fail_msg)
 }
 
 void
-Item::set_encumberance(int item_encumberance)
+Item::set_encumberance(const int item_encumberance)
 {
 	encumberance = item_encumberance;
 }
 
 void
-Item::set_item_type(item_type itype)
+Item::set_item_type(const item_type itype)
 {
 	type = itype;
 }
@@ -142,23 +154,65 @@ Weapon::Weapon() : Item()
 	ammo_remaining = 0;
 }
 
-Weapon::Weapon(const string &wep_name, const string &wep_description,
-	       const string &wep_fail_msg, int wep_encumberance,
-	       weapon_type wep_type, int wep_damage, int wep_ammo_remaining) :
-	Item(wep_name, wep_description, wep_fail_msg, wep_encumberance,
-	     WEAPON),
-	wtype(wep_type), damage(wep_damage), ammo_remaining(wep_ammo_remaining)
+Weapon::Weapon(const string &wep_name, weapon_type wep_type) :
+	Item(wep_name, WEAPON), wtype(wep_type)
 {
+	damage = 1;
+	ammo_remaining = 0;
 }
 
-Weapon::Weapon(Weapon &rhs)
+// Weapon::Weapon(Weapon &rhs)
+// {
+// 	name = rhs.name;
+// 	description = rhs.description;
+// 	fail_message = rhs.fail_message;
+// 	encumberance = rhs.encumberance;
+// 	type = rhs.type;
+// 	wtype = rhs.wtype;
+// 	damage = rhs.damage;
+// 	ammo_remaining = rhs.ammo_remaining;
+// }
+
+void
+Weapon::load(int num_projectiles)
 {
-	name = rhs.name;
-	description = rhs.description;
-	fail_message = rhs.fail_message;
-	encumberance = rhs.encumberance;
-	type = rhs.type;
-	wtype = rhs.wtype;
-	damage = rhs.damage;
-	ammo_remaining = rhs.ammo_remaining;
+	ammo_remaining += num_projectiles;
+}
+
+/* Accessors */
+weapon_type
+Weapon::get_weapon_type() const
+{
+	return wtype;
+}
+
+int
+Weapon::get_damage() const
+{
+	return damage;
+}
+
+int
+Weapon::get_ammo_remaining() const
+{
+	return ammo_remaining;
+}
+
+/* Mutators */
+void
+Weapon::set_weapon_type(const weapon_type wep_type)
+{
+	wtype = wep_type;
+}
+
+void
+Weapon::set_damage(const int wep_damage)
+{
+	damage = wep_damage;
+}
+
+void
+Weapon::set_ammo_remaining(const int wep_ammo_remaining)
+{
+	ammo_remaining = wep_ammo_remaining;
 }
