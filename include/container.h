@@ -21,15 +21,22 @@ public:
 	void add_item(Item& item);
 	void add_item(Item&& item);
 
+	/* Returns item number of given item name.
+	 * Returns -1 if item is not in container. */
+	int get_item_num_by_name(const std::string &item_name);
+
 	/* Move an item from one container to another. *
 	 * Returns false if the move doesn't happen    */
 	bool move_item(Container &to, const int item_num);
+	bool move_item(Container &to, const std::string item_name);
 
 	/* Destroys an item */
 	bool destroy_item(const int item_num);
+	bool destroy_item(const std::string item_name);
 
 	/* Returns -1 if item cannot be found */
 	bool has_item(const int item_num);
+	bool has_item(const std::string item_name);
 
 	/* Get a pointer to an item.             *
 	 * Returns nullptr if item is not found. */
