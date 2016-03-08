@@ -70,8 +70,13 @@ Room
 }
 
 bool
-Map::add_room(int room_num, string &room_name, string &description)
+Map::add_room(int room_num, const char *room_name, const char *room_description)
 {
+	string name = room_name;
+	string description = room_description;
+
+	rooms.emplace(room_num, room_num, name, description);
+
 	return true;
 }
 
