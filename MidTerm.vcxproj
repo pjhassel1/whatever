@@ -111,6 +111,8 @@
     <ClInclude Include="include\items.h" />
     <ClInclude Include="include\map.h" />
     <ClInclude Include="include\room.h" />
+    <ClInclude Include="include\setup_map.h" />
+    <ClInclude Include="include\utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
