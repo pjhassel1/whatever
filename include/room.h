@@ -25,6 +25,9 @@ public:
 	/* Removes an exit, returns false if exit cannot be found */
 	bool remove_exit(std::string &exit_name);
 
+	/* Prints room name and description */
+	void look();
+
 	/* Accessors */
 	int get_room_num();
 	std::string get_name();

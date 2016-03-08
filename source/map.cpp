@@ -1,48 +1,64 @@
 #include "../include/map.h"
 
+using std::string;
+using std::unordered_map;
+
 Map::Map()
 {
-
-}
-
-string&
-Map::get_room_name()
-{
-	string b;
-
-	return b;
+	current_location = 1;
 }
 
 string
-&Map::get_room_description()
+Map::get_room_name()
 {
-	string b;
+	return get_current_room().get_name();
+}
 
-	return b;
+string
+Map::get_room_description()
+{
+	return get_current_room().get_description();
 }
 
 bool
-Map::use_exit(std::string exit_name)
+Map::use_exit(string &exit_name)
 {
-	return true;
+	int dest = get_current_room().get_exit_room_number(exit_name);
+
+	if (dest == -1)
+		return false;
+	else {
+		relocate_player(dest);
+		get_current_room().look();
+		return true;
+	}
 }
 
 bool
-Map::get_item(std::string &item_name)
+Map::get_item(string &item_name)
 {
-	return true;
+	return get_current_room().move_item(*this, item_name);
 }
 
 bool
-Map::drop_item(std::string &item_name)
+Map::drop_item(string &item_name)
 {
-	return true;
+	return this->move_item(get_current_room(), item_name);
 }
 
 bool
 Map::relocate_player(int room_num)
 {
-	return true;
+
+	unordered_map<int, Room>::iterator it;
+
+	for (it = rooms.begin(); it != rooms.end(); it++)
+		if (it->second.get_room_num() == room_num) {
+			current_location = room_num;
+			return true;
+		}
+
+	return false;
 }
 
 Room
@@ -54,7 +70,7 @@ Room
 }
 
 bool
-Map::add_room(int room_num, std::string &room_name, std::string &description)
+Map::add_room(int room_num, string &room_name, string &description)
 {
 	return true;
 }

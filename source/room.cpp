@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../include/room.h"
 
 using std::string;
@@ -5,6 +6,8 @@ using std::vector;
 using std::pair;
 using std::make_pair;
 using std::unordered_map;
+using std::cout;
+using std::endl;
 
 Room::Room()
 {
@@ -61,6 +64,13 @@ Room::remove_exit(string &exit_name)
 		return true;
 	else
 		return false;
+}
+
+void
+Room::look()
+{
+	cout << endl << name << endl;
+	cout << description << endl;
 }
 
 /* Accessors */
