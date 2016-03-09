@@ -51,3 +51,18 @@ bool setup_map(Map &map)
 	return true;
 
 }
+
+bool setup_items(Map &map)
+{
+	Item newitem = Item("Singnature Ring", TOOL);
+	newitem.set_description("");
+	newitem.set_fail_message("Nothing happens.");
+	newitem.set_encumberance(1);
+	newitem.add_alias("ring");
+
+
+
+	newitem = Item("Blue Card", TOOL);
+
+	return true;
+}
