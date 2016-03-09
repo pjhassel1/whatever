@@ -55,6 +55,7 @@ public:
 	void set_fail_message(const string &item_fail_msg);
 	void set_encumberance(const int item_encumberance);
 	void set_item_type(const item_type itype);
+	void add_alias(const char *alias);
 
 	int get_item_num() const;
 	string get_name() const;
