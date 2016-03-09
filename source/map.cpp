@@ -64,32 +64,31 @@ Map::relocate_player(int room_num)
 Room
 &Map::get_current_room()
 {
-	Room b;
-
-	return b;
+	return rooms[current_location];
 }
 
 bool
-Map::add_room(int room_num, const char *room_name, const char *room_description)
+Map::add_room(int room_num, char const *room_name, char const *room_description)
 {
-	string name = room_name;
-	string description = room_description;
-
-	rooms.emplace(room_num, room_num, name, description);
+	Room rm = Room(room_num, room_name, room_description);
+	rooms.insert(std::pair<int, Room>(room_num, rm));
+	// rooms.emplace(room_num, room_num, room_name, room_description);
 
 	return true;
 }
 
+/*
 void
 Map::add_item_to_room(int room_num, Item &item)
 {
 
 }
+*/
 
 void
 Map::add_item_to_room(int room_num, Item &&item)
 {
-
+	rooms[room_num].add_item(item);
 }
 
 int

@@ -1,3 +1,6 @@
+#ifndef _CONTAINER_H
+#define _CONTAINER_H
+
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -44,6 +47,8 @@ public:
 private:
 	std::vector<Item> items;
 };
+
+#endif /* _CONTAINER_H */
 
 /* Emacs stuff, ignore this */
 // Local Variables:

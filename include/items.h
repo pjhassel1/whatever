@@ -72,7 +72,6 @@ protected:
 	static int num_items;
 };
 
-int Item::num_items {0};
 
 /* Weapon Class
  *

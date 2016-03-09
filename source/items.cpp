@@ -15,6 +15,8 @@ using std::vector;
  * Item Class *
  **************/
 
+int Item::num_items {0};
+
 /* Default constructor */
 Item::Item()
 {

@@ -16,9 +16,16 @@ Room::Room()
 	description = "This place is vague.";
 }
 
-Room::Room(int room_num, string &room_name, string &room_description) :
+Room::Room(int room_num, const string room_name, const string room_description) :
 	room_number(room_num), name(room_name), description(room_description)
 {
+}
+
+Room::Room(int room_num, const char *room_name, const char *room_description)
+{
+	room_number = room_num;
+	name = room_name;
+	description = room_description;
 }
 
 vector<string>&&

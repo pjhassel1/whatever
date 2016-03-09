@@ -11,7 +11,12 @@ class Room : public Container
 public:
 	Room();
 	/* Room number _must_ be unique! */
-	Room(int room_num, std::string &name, std::string &description);
+	Room(int room_num, const std::string name,
+	     const std::string description);
+
+	Room(int room_num, const char *name,
+	     const char *description);
+
 
 	/* Returns the names of the exits */
 	std::vector<std::string>&& get_exit_names();

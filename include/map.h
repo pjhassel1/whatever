@@ -54,11 +54,11 @@ public:
 	Room &get_current_room();
 
 	/* Adds a room to the map.  Returns false if room cannot be added */
-	bool add_room(int room_num, const char *room_name,
-		      const char *description);
+	bool add_room(int room_num, char const *room_name,
+		      char const *description);
 
 	/* Adds an item to a room */
-	void add_item_to_room(int room_num, Item &item);
+	// void add_item_to_room(int room_num, Item &item);
 	void add_item_to_room(int room_num, Item &&item);
 
 	/*----------------------*\
