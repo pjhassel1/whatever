@@ -1,7 +1,8 @@
 CC=c++
 CFLAGS="-std=c++11"
 INCLUDES="include"
-BINARIES=source/items.o source/container.o source/room.o source/setup_map.o source/map.o
+BINARIES=source/items.o source/container.o source/room.o source/setup_map.o \
+	source/utility.o source/map.o
 
 all: midterm
 

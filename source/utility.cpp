@@ -3,8 +3,31 @@
 #define CONSOLE_WIDTH 80
 
 using std::string;
+using std::vector;
 using std::cout;
 using std::cin;
+
+vector<string>
+tokenize(string command)
+{
+	size_t begin {0};
+	size_t end {1};
+	vector<string> retval;
+
+	while (end < command.length()) {
+		if (command.at(end) == ' ') {
+			retval.push_back(command.substr(begin, end - begin));
+			begin = end + 1;
+			end = begin + 1;
+		}
+	}
+
+	if (command.length() > 0) {
+		retval.push_back(command.substr(begin, end - begin));
+	}
+
+	return retval;
+}
 
 string
 word_wrap(string paragraph)

@@ -3,6 +3,7 @@
 #include "include/items.h"
 #include "include/room.h"
 #include "include/setup_map.h"
+#include "include/utility.h"
 
 using std::cout;
 using std::endl;
@@ -12,12 +13,15 @@ int main()
 {
 	Map map;
 
-	if (setup_map(map))
-		cout << "Map initialized." << endl;
-	else
+	if (! setup_map(map)) {
 		cout << "Map failed to initialize." << endl;
+		return 1;
+	}
 
-	std::cout << "whatever" << std::endl;
+	cout << map.get_current_room().get_name() << endl;
+	cout << word_wrap(map.get_current_room().get_description()) << endl;
+
+
 
 	/* Only run this in windows */
 #ifdef _MSC_VER
