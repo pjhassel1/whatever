@@ -1,0 +1,14 @@
+* Puzzles
+
+- Signet Ring (room 4)
+  - Used to release swords in room 5
+
+- Cards (room 1)
+  - Red goes to room 6
+  - Blue goes to room 4
+    
+- Pump (switch in kitchen)
+  - turns on sump pump in room 13
+    
+- Blacklight flashlight
+  - Reveals message in attic "Through the water lies many gates"
