@@ -10,6 +10,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+/*
 void
 look(Map &map)
 {
@@ -32,6 +33,7 @@ look(Map &map)
 			cout << "  " << e << endl;
 	}
 }
+*/
 
 string
 word_wrap(string paragraph)

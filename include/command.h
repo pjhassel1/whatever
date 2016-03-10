@@ -9,6 +9,7 @@
 void run_repl(Map &map_obj);
 
 /* Commands */
+void look(Map &map_obj);
 void look(Map &map_obj, std::vector<std::string> args);
 void move(Map &map_obj, std::string direction);
 void open(Map &map_obj, std::string container);

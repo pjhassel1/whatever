@@ -169,6 +169,13 @@ run_repl(Map &map)
 }
 
 void
+look(Map &map)
+{
+	vector<string> args;
+	look(map, args);
+}
+
+void
 look(Map &map, vector<string> args)
 {
 	/* If we look at the room */

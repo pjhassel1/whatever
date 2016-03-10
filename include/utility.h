@@ -11,7 +11,7 @@
  */
 
 /* Print name, description, exits, and items in current room */
-void look(Map &map_obj);
+// void look(Map &map_obj);
 
 /*
  * Utility functions
