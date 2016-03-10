@@ -19,7 +19,7 @@ public:
 
 
 	/* Returns the names of the exits */
-	std::vector<std::string>&& get_exit_names();
+	std::vector<std::string> get_exit_names();
 
 	/* Returns the room number an exit leads to */
 	int get_exit_room_number(std::string &exit_name);

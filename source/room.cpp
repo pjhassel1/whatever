@@ -28,7 +28,7 @@ Room::Room(int room_num, const char *room_name, const char *room_description)
 	description = room_description;
 }
 
-vector<string>&&
+vector<string>
 Room::get_exit_names()
 {
 	vector<string> room_exits;
@@ -36,7 +36,7 @@ Room::get_exit_names()
 		room_exits.push_back(m.first);
 	}
 
-	return std::move(room_exits);
+	return room_exits;
 }
 
 int
