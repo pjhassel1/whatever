@@ -82,18 +82,44 @@ run_repl(Map &map)
 		}
 
 		/* Movement commands */
+
+		if (str_compare(command, "n")) {
+			command = "north";
+		}
+
+		if (str_compare(command, "s")) {
+			command = "south";
+		}
+
+		if (str_compare(command, "e")) {
+			command = "east";
+		}
+
+		if (str_compare(command, "w")) {
+			command = "west";
+		}
+
+		if (str_compare(command, "u")) {
+			command = "up";
+		}
+
+		if (str_compare(command, "d")) {
+			command = "down";
+		}
+
+		for (auto e : map.get_current_room().get_exit_names()) {
+			if (e == command) {
+				move(map, command);
+				continue;
+			}
+		}
+
 		if (str_compare(command, "north") ||
-		    str_compare(command, "n")     ||
 		    str_compare(command, "south") ||
-		    str_compare(command, "s")     ||
 		    str_compare(command, "east")  ||
-		    str_compare(command, "e")     ||
 		    str_compare(command, "west")  ||
-		    str_compare(command, "w")     ||
 		    str_compare(command, "up")    ||
-		    str_compare(command, "u")     ||
-		    str_compare(command, "down")  ||
-		    str_compare(command, "d")) {
+		    str_compare(command, "down")) {
 			move(map, command);
 			continue;
 		}
