@@ -1,6 +1,6 @@
 CC=c++
-CFLAGS="-std=c++11"
-INCLUDES="include"
+CFLAGS=-std=c++11 -g
+INCLUDES=include
 BINARIES=source/items.o source/container.o source/room.o source/setup_map.o \
 	source/utility.o source/map.o
 
@@ -9,6 +9,7 @@ all: midterm
 .PHONY: clean
 clean:
 	$(MAKE) -C source clean
+	rm -f midterm
 
 .PHONY: source
 source:

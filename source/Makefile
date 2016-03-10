@@ -1,5 +1,5 @@
 CC=c++
-CFLAGS="-std=c++11"
+CFLAGS=-std=c++11 -g
 INCLUDES=../include
 BINARIES=items.o container.o map.o setup_map.o room.o utility.o
 
