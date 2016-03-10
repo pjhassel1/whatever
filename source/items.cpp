@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include "../include/items.h"
+#include "../include/utility.h"
 
 
 using std::string;
@@ -112,6 +113,25 @@ Item::get_item_type() const
 	return type;
 }
 
+void
+Item::add_alias(const string &alias)
+{
+	aliases.push_back(alias);
+}
+
+bool
+Item::is_item_name(const string &token)
+{
+	bool retval = false;
+
+	for (auto s : aliases) {
+		if (str_compare(s, token)) {
+			retval = true;
+			break;
+		}
+	}
+}
+
 /* Mutators */
 
 void
@@ -143,6 +163,7 @@ Item::set_item_type(const item_type itype)
 {
 	type = itype;
 }
+
 
 /****************
  * Weapon Class *

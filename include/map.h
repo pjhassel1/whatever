@@ -24,13 +24,13 @@ public:
 	\*-----------------------*/
 
 	/* Gets the name of the current room */
-	string get_room_name();
+	std::string get_room_name();
 
 	/* Gets the description of the current room */
-	string get_room_description();
+	std::string get_room_description();
 
 	/* Gets a vector of exit names from the current room */
-	std::vector<std::string>&& get_exit_names();
+	std::vector<std::string> get_exit_names();
 
 	/* Move through an exit and prints name and description of new room.
 	 * Returns false if exit or destination does not exist. */

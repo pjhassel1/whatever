@@ -7,8 +7,7 @@
 #define _ITEMS_H
 
 #include <string>
-
-using std::string;
+#include <vector>
 
 /* Types of items */
 enum item_type
@@ -40,37 +39,39 @@ class Item
 {
 public:
 	Item();
-	Item(const string &item_name, item_type itype);
+	Item(const std::string &item_name, item_type itype);
 
 	/* Copy constructor */
 	//Item(Item& rhs);
 	/* Move constructor */
 	//Item(Item&& rhs);
 
-	string use();
+	std::string use();
 	int get_next_item_num();
+	void add_alias(const std::string &alias);
+	bool is_item_name(const std::string &token);
 
-	void set_name(const string &item_name);
-	void set_description(const string &item_description);
-	void set_fail_message(const string &item_fail_msg);
+	void set_name(const std::string &item_name);
+	void set_description(const std::string &item_description);
+	void set_fail_message(const std::string &item_fail_msg);
 	void set_encumberance(const int item_encumberance);
 	void set_item_type(const item_type itype);
-	void add_alias(const char *alias);
 
 	int get_item_num() const;
-	string get_name() const;
-	string get_description() const;
-	string get_fail_message() const;
+	std::string get_name() const;
+	std::string get_description() const;
+	std::string get_fail_message() const;
 	int get_encumberance() const;
 	item_type get_item_type() const;
 protected:
 	int item_num;
-	string name;
-	string description;
-	string fail_message;
+	std::string name;
+	std::string description;
+	std::string fail_message;
 	int encumberance;
 	item_type type;
 	static int num_items;
+	std::vector<std::string> aliases;
 };
 
 
@@ -81,7 +82,7 @@ class Weapon : public Item
 {
 public:
 	Weapon();
-	Weapon(const string &wep_name, weapon_type wep_type);
+	Weapon(const std::string &wep_name, weapon_type wep_type);
 	// Weapon(Weapon &rhs);
 	// Weapon(Weapon &&rhs);
 

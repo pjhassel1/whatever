@@ -3,8 +3,21 @@
 
 using std::string;
 using std::vector;
+using std::unordered_map;
 
 Container::Container() { }
+
+unordered_map<string, int>
+Container::get_item_list()
+{
+	unordered_map<string, int> retval;
+
+	for (auto i : items) {
+		retval.emplace(i.get_name(), i.get_item_num());
+	}
+
+	return retval;
+}
 
 void
 Container::add_item(Item &item)

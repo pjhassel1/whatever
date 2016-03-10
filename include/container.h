@@ -18,7 +18,7 @@ public:
 	Container();
 
 	/* Return an unordered map of item names and numbers */
-	std::unordered_map<string, int> get_item_list();
+	std::unordered_map<std::string, int> get_item_list();
 
 	/* Add an item to the container */
 	void add_item(Item& item);

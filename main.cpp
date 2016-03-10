@@ -18,10 +18,10 @@ int main()
 		return 1;
 	}
 
-	cout << map.get_current_room().get_name() << endl;
-	cout << word_wrap(map.get_current_room().get_description()) << endl;
+	// cout << map.get_current_room().get_name() << endl;
+	// cout << word_wrap(map.get_current_room().get_description()) << endl;
 
-
+	look(map);
 
 	/* Only run this in windows */
 #ifdef _MSC_VER
