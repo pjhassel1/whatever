@@ -2,6 +2,7 @@
 
 #include "../include/map.h"
 #include "../include/utility.h"
+#include "../include/command.h"
 
 using std::string;
 using std::unordered_map;
@@ -34,7 +35,6 @@ Map::use_exit(string &exit_name)
 		return false;
 	else {
 		relocate_player(dest);
-		get_current_room().look();
 		return true;
 	}
 }

@@ -77,8 +77,25 @@ Room::remove_exit(string &exit_name)
 void
 Room::look()
 {
+	unordered_map<string, int> item_list = get_item_list();
+
 	cout << endl << name << endl;
 	cout << word_wrap(description) << endl;
+
+	if (exits.size() == 0)
+		cout << "There are no visible exits." << endl;
+	else
+		cout << "Exits:" << endl;
+
+	for (auto i : exits)
+		cout << "  " << i.first << endl;
+
+	if (item_list.size() > 0)
+		cout << "You can see here:" << endl;
+
+	for (auto j : item_list)
+		cout << "  " << j.first << endl;
+
 }
 
 /* Accessors */

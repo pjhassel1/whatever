@@ -19,6 +19,11 @@ int main()
 		return 1;
 	}
 
+	if (! setup_items(map)) {
+		cout << "Items failed to initialize." << endl;
+		return 1;
+	}
+
 	// cout << map.get_current_room().get_name() << endl;
 	// cout << word_wrap(map.get_current_room().get_description()) << endl;
 

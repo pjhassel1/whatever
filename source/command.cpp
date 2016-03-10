@@ -198,6 +198,7 @@ look(Map &map, vector<string> args)
 
 	/* Look at an item in the room */
 	for (auto i : map.get_current_room().get_item_list()) {
+
 		if (str_compare(args[0], i.first)) {
 			cout << map.get_current_room().get_item_ptr(i.second)
 				->get_description() << endl;
@@ -212,7 +213,10 @@ look(Map &map, vector<string> args)
 void
 move(Map &map, string direction)
 {
-	if (! map.use_exit(direction))
+	vector<string> args;
+	if (map.use_exit(direction)) {
+		look(map, args);
+	} else
 		cout << "You can't go that way." << endl;
 }
 
