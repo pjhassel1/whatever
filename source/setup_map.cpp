@@ -22,10 +22,7 @@ bool setup_map(Map &map)
 	map.add_room(6, "Main room",
 		"In the center of the room is a long dead circular fire pit.  Above it is a stainless steel hood to capture the smoke.  Around the pit are leather couches and chairs.  The northwest corner has a cabinet and there is a small horizontal slot on the west wall beside the cabinet.");
 
-	map.add_room(7, "Bedroom1",
-		"Twin beds on east and west walls with headboards along the north wall.  Night stands beside each bed.");
-
-	map.add_room(8, "Bedroom2",
+	map.add_room(8, "Bedroom",
 		"Queen bed in center of room with headboard on the north wall.  Nightstands on either side of bed.");
 
 	map.add_room(9, "Hallway",
@@ -53,6 +50,19 @@ bool setup_map(Map &map)
 	map.add_exit_to_room(5, "north", 6);
 	map.add_exit_to_room(6, "south", 5);
 	map.add_exit_to_room(6, "down", 13);
+	map.add_exit_to_room(6, "east", 9);
+	map.add_exit_to_room(6, "up", 12);
+	map.add_exit_to_room(8, "south", 9);
+	map.add_exit_to_room(9, "south", 11);
+	map.add_exit_to_room(9, "north", 8);
+	map.add_exit_to_room(9, "west", 6);
+	map.add_exit_to_room(10, "west", 11);
+	map.add_exit_to_room(11, "east", 10);
+	map.add_exit_to_room(11, "north", 9);
+	map.add_exit_to_room(12, "down", 6);
+	map.add_exit_to_room(13, "up", 6);
+	map.add_exit_to_room(13, "east", 14);
+	map.add_exit_to_room(14, "west", 13);
 
 
 
@@ -68,6 +78,7 @@ bool setup_items(Map &map)
 	newitem.set_fail_message("Nothing happens.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("ring");
+	map.add_item_to_room(4, std::move(newitem));
 
 
 
@@ -76,37 +87,42 @@ bool setup_items(Map &map)
 	newitem.set_fail_message("You appear back in the Teleport room.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("card");
+	map.add_item_to_room(1, std::move(newitem));
 
 	newitem = Item("Red Card", TOOL);
 	newitem.set_description("Looks like a credit card with a smart chip on it.");
 	newitem.set_fail_message("You appear back in the Teleport room.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("card");
+	map.add_item_to_room(1, std::move(newitem));
 
 	newitem = Item("Katana", WEAPON);
 	newitem.set_description("42inch sligtly curved sword with the edge on the outside of the curve.");
 	newitem.set_fail_message("You nearly cut your toes off.  Watch it!!");
 	newitem.set_encumberance(2);
 	newitem.add_alias("sword");
+	map.add_item_to_room(5, std::move(newitem));
 
 	newitem = Item("Tachi", WEAPON);
 	newitem.set_description("24inch sligtly curved sword with the edge on the outside of the curve.");
 	newitem.set_fail_message("You nearly cut your toes off.  Watch it!!");
 	newitem.set_encumberance(1);
 	newitem.add_alias("sword");
+	map.add_item_to_room(5, std::move(newitem));
 
 	newitem = Item("Flashlight", TOOL);
 	newitem.set_description("6inch black flashlight.");
 	newitem.set_fail_message("You shine the light in your eyes.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("torch");
+	map.add_item_to_room(8, std::move(newitem));
 
 	newitem = Item("Blacklight", TOOL);
 	newitem.set_description("6inch black flashlight.");
 	newitem.set_fail_message("You see nothing.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("torch");
-
+	map.add_item_to_room(8, std::move(newitem));
 
 
 
