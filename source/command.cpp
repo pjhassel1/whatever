@@ -76,7 +76,8 @@ run_repl(Map &map)
 			return;
 
 		/* Help */
-		if (str_compare(command, "help")) {
+		if (str_compare(command, "help") ||
+			str_compare(command, "?")) {
 			print_help();
 			continue;
 		}

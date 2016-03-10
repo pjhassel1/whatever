@@ -46,6 +46,15 @@ bool setup_map(Map &map)
 	map.add_room(14, "Well room",
 		"In the center of the east half of room is a water well.");
 
+	map.add_exit_to_room(1, "north", 2);
+	map.add_exit_to_room(1, "south", 3);
+	map.add_exit_to_room(2, "south", 1);
+	map.add_exit_to_room(3, "north", 1);
+	map.add_exit_to_room(5, "north", 6);
+	map.add_exit_to_room(6, "south", 5);
+	map.add_exit_to_room(6, "down", 13);
+
+
 
 
 	return true;
@@ -55,7 +64,7 @@ bool setup_map(Map &map)
 bool setup_items(Map &map)
 {
 	Item newitem = Item("Singnature Ring", TOOL);
-	newitem.set_description("");
+	newitem.set_description("Silver ring with inset red stone which has a coat of arms emblem made of silver.");
 	newitem.set_fail_message("Nothing happens.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("ring");
@@ -63,6 +72,43 @@ bool setup_items(Map &map)
 
 
 	newitem = Item("Blue Card", TOOL);
+	newitem.set_description("Looks like a credit card with a smart chip on it.");
+	newitem.set_fail_message("You appear back in the Teleport room.");
+	newitem.set_encumberance(1);
+	newitem.add_alias("card");
+
+	newitem = Item("Red Card", TOOL);
+	newitem.set_description("Looks like a credit card with a smart chip on it.");
+	newitem.set_fail_message("You appear back in the Teleport room.");
+	newitem.set_encumberance(1);
+	newitem.add_alias("card");
+
+	newitem = Item("Katana", WEAPON);
+	newitem.set_description("42inch sligtly curved sword with the edge on the outside of the curve.");
+	newitem.set_fail_message("You nearly cut your toes off.  Watch it!!");
+	newitem.set_encumberance(2);
+	newitem.add_alias("sword");
+
+	newitem = Item("Tachi", WEAPON);
+	newitem.set_description("24inch sligtly curved sword with the edge on the outside of the curve.");
+	newitem.set_fail_message("You nearly cut your toes off.  Watch it!!");
+	newitem.set_encumberance(1);
+	newitem.add_alias("sword");
+
+	newitem = Item("Flashlight", TOOL);
+	newitem.set_description("6inch black flashlight.");
+	newitem.set_fail_message("You shine the light in your eyes.");
+	newitem.set_encumberance(1);
+	newitem.add_alias("torch");
+
+	newitem = Item("Blacklight", TOOL);
+	newitem.set_description("6inch black flashlight.");
+	newitem.set_fail_message("You see nothing.");
+	newitem.set_encumberance(1);
+	newitem.add_alias("torch");
+
+
+
 
 	return true;
 }

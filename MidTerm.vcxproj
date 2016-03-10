@@ -98,14 +98,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\command.cpp" />
     <ClCompile Include="source\container.cpp" />
     <ClCompile Include="source\items.cpp" />
     <ClCompile Include="source\map.cpp" />
     <ClCompile Include="source\room.cpp" />
     <ClCompile Include="source\setup_map.cpp" />
+    <ClCompile Include="source\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="include\command.h" />
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\container.h" />
     <ClInclude Include="include\items.h" />
