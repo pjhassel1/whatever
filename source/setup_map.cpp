@@ -86,14 +86,14 @@ bool setup_items(Map &map)
 	newitem.set_description("Looks like a credit card with a smart chip on it.");
 	newitem.set_fail_message("You appear back in the Teleport room.");
 	newitem.set_encumberance(1);
-	newitem.add_alias("card");
+	newitem.add_alias("blue");
 	map.add_item_to_room(1, std::move(newitem));
 
 	newitem = Item("Red Card", TOOL);
 	newitem.set_description("Looks like a credit card with a smart chip on it.");
 	newitem.set_fail_message("You appear back in the Teleport room.");
 	newitem.set_encumberance(1);
-	newitem.add_alias("card");
+	newitem.add_alias("red");
 	map.add_item_to_room(1, std::move(newitem));
 
 	newitem = Item("Katana", WEAPON);
@@ -107,7 +107,7 @@ bool setup_items(Map &map)
 	newitem.set_description("24inch sligtly curved sword with the edge on the outside of the curve.");
 	newitem.set_fail_message("You nearly cut your toes off.  Watch it!!");
 	newitem.set_encumberance(1);
-	newitem.add_alias("sword");
+	newitem.add_alias("knife");
 	map.add_item_to_room(5, std::move(newitem));
 
 	newitem = Item("Flashlight", TOOL);
@@ -121,7 +121,7 @@ bool setup_items(Map &map)
 	newitem.set_description("6inch black flashlight.");
 	newitem.set_fail_message("You see nothing.");
 	newitem.set_encumberance(1);
-	newitem.add_alias("torch");
+	newitem.add_alias("purple");
 	map.add_item_to_room(8, std::move(newitem));
 
 
