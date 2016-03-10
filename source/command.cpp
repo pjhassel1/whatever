@@ -51,6 +51,10 @@ run_repl(Map &map)
 			cout << tok << endl;
 		}
 #endif
+		/* Get rid of go, we just search for directions */
+		if (str_compare(tokens.front(), "go"))
+			tokens.erase(tokens.begin());
+
 		command = tokens.front();
 		tokens.erase(tokens.begin());
 
@@ -71,13 +75,42 @@ run_repl(Map &map)
 		    str_compare(command, "goodbye"))
 			return;
 
+		/* Help */
 		if (str_compare(command, "help")) {
 			print_help();
 			continue;
 		}
 
+		/* Movement commands */
+		if (str_compare(command, "north") ||
+		    str_compare(command, "n")     ||
+		    str_compare(command, "south") ||
+		    str_compare(command, "s")     ||
+		    str_compare(command, "east")  ||
+		    str_compare(command, "e")     ||
+		    str_compare(command, "west")  ||
+		    str_compare(command, "w")     ||
+		    str_compare(command, "up")    ||
+		    str_compare(command, "u")     ||
+		    str_compare(command, "down")  ||
+		    str_compare(command, "d")) {
+			move(map, command);
+			continue;
+		}
+
+		/* Easter egg, don't tell anyone! */
+		if (str_compare(command, "hello")) {
+			if (tokens.size() > 0 &&
+			    str_compare(tokens[0], "sailor"))
+				cout << "Nothing happens here." << endl;
+			else
+				cout << "Hello!" << endl;
+			continue;
+		}
+
 		/* Regular commands */
-		if (str_compare(command, "look")) {
+		if (str_compare(command, "look") ||
+		    str_compare(command, "l")) {
 			look(map, tokens);
 			continue;
 		} else if (str_compare(command, "open")) {
