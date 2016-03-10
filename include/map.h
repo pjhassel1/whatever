@@ -53,6 +53,9 @@ public:
 	/* Gets the current Room object */
 	Room &get_current_room();
 
+	/* Gets a Room object by room number */
+	Room &get_room(int room_num);
+
 	/* Adds a room to the map.  Returns false if room cannot be added */
 	bool add_room(int room_num, char const *room_name,
 		      char const *description);
@@ -60,6 +63,10 @@ public:
 	/* Adds an item to a room */
 	// void add_item_to_room(int room_num, Item &item);
 	void add_item_to_room(int room_num, Item &&item);
+
+	/* Add an exit to a room */
+	bool add_exit_to_room(int room_num, std::string exit_name,
+			      int destination);
 
 	/*----------------------*\
 	| Accessors and Mutators |

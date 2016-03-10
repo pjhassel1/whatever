@@ -72,6 +72,12 @@ Room
 	return rooms[current_location];
 }
 
+Room
+&Map::get_room(int room_num)
+{
+	return rooms[room_num];
+}
+
 bool
 Map::add_room(int room_num, char const *room_name, char const *room_description)
 {
@@ -94,6 +100,12 @@ void
 Map::add_item_to_room(int room_num, Item &&item)
 {
 	rooms[room_num].add_item(item);
+}
+
+bool
+Map::add_exit_to_room(int room_num, string exit_name, int dest)
+{
+	return rooms[room_num].add_exit(exit_name, dest);
 }
 
 int
