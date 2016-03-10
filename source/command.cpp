@@ -27,6 +27,8 @@ run_repl(Map &map)
 	bool quit { false };
 
 	while (! quit) {
+		bool cont = false; /* used for continuing */
+
 		cout << "> ";
 		getline(cin, input_line);
 
@@ -110,9 +112,13 @@ run_repl(Map &map)
 		for (auto e : map.get_current_room().get_exit_names()) {
 			if (e == command) {
 				move(map, command);
-				continue;
+				cont = true;
+				break;
 			}
 		}
+
+		if (cont)
+			continue;
 
 		if (str_compare(command, "north") ||
 		    str_compare(command, "south") ||
