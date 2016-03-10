@@ -80,6 +80,8 @@ tokenize(string command)
 			begin = end + 1;
 			end = begin + 1;
 		}
+
+		end++;
 	}
 
 	if (command.length() > 0) {
@@ -89,11 +91,43 @@ tokenize(string command)
 	return retval;
 }
 
+string
+str_lc(string str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+	return str;
+}
+
+void
+str_lc_ref(string &str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+}
+
 bool
 str_compare(string s1, string s2)
 {
-	std::transform(s1.begin(), s1.end(), s1.begin(), ::tolower);
-	std::transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
+	str_lc_ref(s1);
+	str_lc_ref(s2);
 
-	return s1.compare(s2);
+	if (s1.compare(s2) == 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool
+str_compare(string s1, const char *s2)
+{
+	string sarg = s2;
+	return str_compare(s1, sarg);
+}
+
+bool
+str_compare(const char *s1, const char *s2)
+{
+	string sarg1 = s1;
+	string sarg2 = s2;
+	return str_compare(sarg1, sarg2);
 }

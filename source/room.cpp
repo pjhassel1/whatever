@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/room.h"
+#include "../include/utility.h"
 
 using std::string;
 using std::vector;
@@ -77,7 +78,7 @@ void
 Room::look()
 {
 	cout << endl << name << endl;
-	cout << description << endl;
+	cout << word_wrap(description) << endl;
 }
 
 /* Accessors */

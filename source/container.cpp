@@ -1,5 +1,7 @@
 #include <utility>
+#include <algorithm>
 #include "../include/container.h"
+#include "../include/utility.h"
 
 using std::string;
 using std::vector;
@@ -37,7 +39,7 @@ Container::get_item_num_by_name(const string &item_name)
 	vector<Item>::iterator it;
 
 	for (it = items.begin(); it != items.end(); it++)
-		if (it->get_name() == item_name)
+		if (it->is_item_name(item_name))
 			return it->get_item_num();
 
 	return -1;
@@ -107,8 +109,11 @@ Container::has_item(const int item_num)
 }
 
 bool
-Container::has_item(const string item_name)
+Container::has_item(const string iname)
 {
+	string item_name = iname;
+	str_lc_ref(item_name);
+
 	int item_num = get_item_num_by_name(item_name);
 
 	if (item_num == -1)

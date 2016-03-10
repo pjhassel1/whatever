@@ -1,13 +1,16 @@
 CC=c++
 CFLAGS=-std=c++11 -g
 INCLUDES=../include
-BINARIES=items.o container.o map.o setup_map.o room.o utility.o
+BINARIES=items.o container.o map.o setup_map.o room.o utility.o command.o
 
 all: $(BINARIES)
 
 .PHONY: clean
 clean:
 	rm -f $(BINARIES)
+
+command.o: command.cpp $(INCLUDES)/command.h $(INCLUDES)/config.h
+	$(CC) $(CFLAGS) -c command.cpp
 
 items.o: items.cpp $(INCLUDES)/items.h
 	$(CC) $(CFLAGS) -c items.cpp

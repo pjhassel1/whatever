@@ -4,6 +4,7 @@
 #include "include/room.h"
 #include "include/setup_map.h"
 #include "include/utility.h"
+#include "include/command.h"
 
 using std::cout;
 using std::endl;
@@ -22,6 +23,8 @@ int main()
 	// cout << word_wrap(map.get_current_room().get_description()) << endl;
 
 	look(map);
+
+	run_repl(map);
 
 	/* Only run this in windows */
 #ifdef _MSC_VER

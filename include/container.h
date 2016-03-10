@@ -37,7 +37,8 @@ public:
 	bool destroy_item(const int item_num);
 	bool destroy_item(const std::string item_name);
 
-	/* Returns -1 if item cannot be found */
+	/* Returns true if item is in container.  Also searches aliases.
+	 * String search is case insensitive. */
 	bool has_item(const int item_num);
 	bool has_item(const std::string item_name);
 

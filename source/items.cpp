@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include "../include/items.h"
 #include "../include/utility.h"
 
@@ -75,6 +76,34 @@ Item::get_next_item_num()
 	return Item::num_items;
 }
 
+void
+Item::add_alias(const string &alias)
+{
+	aliases.push_back(alias);
+}
+
+bool
+Item::is_item_name(const string &token)
+{
+	string item_name = str_lc(token);
+	bool retval = false;
+
+	for (auto s : aliases) {
+		if (str_compare(s, item_name)) {
+			retval = true;
+			break;
+		}
+	}
+
+	return retval;
+}
+
+void
+Item::look()
+{
+	std::cout << word_wrap(description) << std::endl;
+}
+
 /* Accessors */
 
 int
@@ -111,25 +140,6 @@ item_type
 Item::get_item_type() const
 {
 	return type;
-}
-
-void
-Item::add_alias(const string &alias)
-{
-	aliases.push_back(alias);
-}
-
-bool
-Item::is_item_name(const string &token)
-{
-	bool retval = false;
-
-	for (auto s : aliases) {
-		if (str_compare(s, token)) {
-			retval = true;
-			break;
-		}
-	}
 }
 
 /* Mutators */

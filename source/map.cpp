@@ -1,4 +1,7 @@
+#include <string>
+
 #include "../include/map.h"
+#include "../include/utility.h"
 
 using std::string;
 using std::unordered_map;
@@ -23,7 +26,9 @@ Map::get_room_description()
 bool
 Map::use_exit(string &exit_name)
 {
-	int dest = get_current_room().get_exit_room_number(exit_name);
+	string exit = str_lc(exit_name);
+
+	int dest = get_current_room().get_exit_room_number(exit);
 
 	if (dest == -1)
 		return false;

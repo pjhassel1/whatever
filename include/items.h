@@ -46,17 +46,30 @@ public:
 	/* Move constructor */
 	//Item(Item&& rhs);
 
+	/* Just returns the fail string */
 	std::string use();
+
+	/* Returns the next item number for the constructor */
 	int get_next_item_num();
+
+	/* Adds an alias for an item, which acts as an addition name */
 	void add_alias(const std::string &alias);
+
+	/* Returns true if the string is the name or an alias of this item.
+	 * Comparison is case insensitive. */
 	bool is_item_name(const std::string &token);
 
+	/* Looks at an item */
+	void look();
+
+	/* Mutators */
 	void set_name(const std::string &item_name);
 	void set_description(const std::string &item_description);
 	void set_fail_message(const std::string &item_fail_msg);
 	void set_encumberance(const int item_encumberance);
 	void set_item_type(const item_type itype);
 
+	/* Accessors */
 	int get_item_num() const;
 	std::string get_name() const;
 	std::string get_description() const;
