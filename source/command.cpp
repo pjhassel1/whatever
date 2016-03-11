@@ -481,12 +481,12 @@ use(Map &map, string subject, string preposition, string object)
 		} else if (str_compare(preposition, "in")) {
 			if (str_compare(object, "slot")) {
 				if (map.get_current_location() == 3) {
-					map.relocate_player(6);
+					map.relocate_player(5);
 					look(map);
 					return;
 				} else if (map.get_current_location() == 2 ||
 					   map.get_current_location() == 4 ||
-					   map.get_current_location() == 6) {
+					   map.get_current_location() == 5) {
 					map.relocate_player(1);
 					look(map);
 					return;
