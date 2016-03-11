@@ -14,13 +14,13 @@ bool setup_map(Map &map)
 		"Very small room.  There is a small horizontal slot on the east wall.");
 
 	map.add_room(4, "Office",
-		"Shelves line the walls which are filled with books.  A large oak desk with intricate carvings on it is in the middle of the room.");
+		"Shelves line the walls which are filled with books.  A large oak desk with intricate carvings on it is in the middle of the room.  There is a horizontal slot on the south wall.");
 
 	map.add_room(5, "Dojo",
-		"A large sparring mat fills the center of the room and has yellowed with time.  Banners depicting combat hang on the east and west walls.  A shrine is prominately displayed on the south wall.");
+		"A large sparring mat fills the center of the room and has yellowed with time.  Banners depicting combat hang on the east and west walls.  A shrine holding two swords is prominately displayed on the south wall.  There is a horizontal slot on the north wall.");
 
 	map.add_room(6, "Main room",
-		"In the center of the room is a long dead circular fire pit.  Above it is a stainless steel hood to capture the smoke.  Around the pit are leather couches and chairs.  The northwest corner has a cabinet and there is a small horizontal slot on the west wall beside the cabinet.");
+		"In the center of the room is a long dead circular fire pit.  Above it is a stainless steel hood to capture the smoke.  Around the pit are leather couches and chairs.");
 
 	map.add_room(8, "Bedroom",
 		"Queen bed in center of room with headboard on the north wall.  Nightstands on either side of bed.");
@@ -78,6 +78,7 @@ bool setup_items(Map &map)
 	newitem.set_fail_message("Nothing happens.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("ring");
+	newitem.add_alias("Signature ring");
 	map.add_item_to_room(4, std::move(newitem));
 
 
@@ -87,6 +88,7 @@ bool setup_items(Map &map)
 	newitem.set_fail_message("You appear back in the Teleport room.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("blue");
+	newitem.add_alias("card");
 	map.add_item_to_room(1, std::move(newitem));
 
 	newitem = Item("Red Card", TOOL);
@@ -94,6 +96,7 @@ bool setup_items(Map &map)
 	newitem.set_fail_message("You appear back in the Teleport room.");
 	newitem.set_encumberance(1);
 	newitem.add_alias("red");
+	newitem.add_alias("card");
 	map.add_item_to_room(1, std::move(newitem));
 
 	newitem = Item("Katana", WEAPON);
