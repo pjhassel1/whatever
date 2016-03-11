@@ -20,8 +20,12 @@ using std::getline;
 void
 run_repl(Map &map)
 {
-	string input_line;
-	string command;
+	string input_line;        /* Line read from user */
+	string command;           /* Command from user */
+	string subject;           /* Subject noun */
+	string object;            /* Direct or propositional object */
+	string preposition;       /* Preposition */
+
 	vector<string> tokens;
 
 	bool quit { false };
@@ -48,11 +52,6 @@ run_repl(Map &map)
 			continue;
 		}
 
-#ifdef DEBUG
-		for (auto tok : tokens) {
-			cout << tok << endl;
-		}
-#endif
 		/* Get rid of go, we just search for directions */
 		if (str_compare(tokens.front(), "go"))
 			tokens.erase(tokens.begin());
@@ -83,6 +82,151 @@ run_repl(Map &map)
 			print_help();
 			continue;
 		}
+
+		/**********\
+		|* Parser *|
+		\**********/
+		subject = "";
+		object = "";
+		preposition = "";
+
+		/* Multi-word commands */
+		if (tokens.size() > 0) {
+
+			/* look at - just shorten to "look" */
+			if (str_compare(command, "look") &&
+			    str_compare(tokens[0], "at")) {
+				tokens.erase(tokens.begin());
+			}
+
+			/* turn on */
+			if (str_compare(command, "turn") &&
+			    str_compare(tokens[0], "on")) {
+
+				command = "turn on";
+				tokens.erase(tokens.begin());
+			}
+
+			/* put in */
+			if (str_compare(command, "put") &&
+			    str_compare(tokens[0], "in")) {
+
+				command = "put in";
+				tokens.erase(tokens.begin());
+			}
+		}
+
+		/* Find the subject */
+		/* This is hacky.  Gotta find a better way. */
+		if (tokens.size() > 1) {
+			if ((str_compare(tokens[0], "red") ||
+			     str_compare(tokens[0], "blue")) &&
+			    str_compare(tokens[1], "card")) {
+
+				subject.append(tokens[0]);
+				subject.append(" ");
+				subject.append(tokens[1]);
+
+				tokens.erase(tokens.begin());
+				tokens.erase(tokens.begin());
+
+			} else if ((str_compare(tokens[0], "signature") ||
+				    str_compare(tokens[0], "signet")) &&
+				   str_compare(tokens[1], "ring")) {
+
+				subject.append(tokens[0]);
+				subject.append(" ");
+				subject.append(tokens[1]);
+
+				tokens.erase(tokens.begin());
+				tokens.erase(tokens.begin());
+			} else {
+				subject = tokens[0];
+				tokens.erase(tokens.begin());
+			}
+		} else {
+			subject = tokens[0];
+			tokens.erase(tokens.begin());
+		}
+
+		/* Find the preposition */
+		if (tokens.size() > 1) {
+			preposition = tokens[0];
+			tokens.erase(tokens.begin());
+		}
+
+		/* Find the direct or prepositional object */
+		if (tokens.size() > 0) {
+			object = tokens[0];
+			tokens.erase(tokens.begin());
+		}
+
+		/* Make sure we understand the preposition */
+		if (preposition.length() > 0) {
+			if (!(str_compare(preposition, "with") ||
+			      str_compare(preposition, "in"))) {
+				cout << "I don't get what you're trying to do."
+				     << endl;
+				continue;
+			}
+		}
+
+#ifdef DEBUG
+
+		cout << "Parser Debug {" << endl;
+		cout << "  Command:     '" << command << "'" << endl;
+		cout << "  Subject:     '" << subject << "'" << endl;
+		cout << "  Preposition: '" << preposition << "'" << endl;
+		cout << "  Object:      '" << object << "'" << endl;
+		cout << "}" << endl;
+
+#endif
+
+		/**************************\
+		|* Room specific commands *|
+		\**************************/
+
+		/* Put */
+		if (str_compare(command, "put") ||
+		    str_compare(command, "put in")) {
+			if (subject.length() == 0) {
+				cout << "Put what?" << endl;
+				continue;
+			}
+
+			if (! map.has_item(subject)) {
+				cout << "You don't have that." << endl;
+				continue;
+			}
+
+			if (preposition.length() > 0 &&
+			    object.length() == 0) {
+				cout << "Put " << subject << preposition
+				     << " what?" << endl;
+				continue;
+			}
+
+			switch (map.get_current_location()) {
+			case 2:
+			case 3:
+			case 4:
+			case 6:
+				cont = true;
+				put(map, subject, preposition, object);
+				break;
+			}
+
+			if (cont)
+				continue;
+
+			cout << "That doesn't sound like a good idea." << endl;
+			continue;
+		}
+
+
+		/********************\
+		|* General Commands *|
+		\********************/
 
 		/* Movement commands */
 
@@ -133,8 +277,7 @@ run_repl(Map &map)
 
 		/* Easter egg, don't tell anyone! */
 		if (str_compare(command, "hello")) {
-			if (tokens.size() > 0 &&
-			    str_compare(tokens[0], "sailor"))
+			if (str_compare(subject, "sailor"))
 				cout << "Nothing happens here." << endl;
 			else
 				cout << "Hello!" << endl;
@@ -144,19 +287,19 @@ run_repl(Map &map)
 		/* Regular commands */
 		if (str_compare(command, "look") ||
 		    str_compare(command, "l")) {
-			look(map, tokens);
+			look(map, subject);
 			continue;
 		} else if (str_compare(command, "open")) {
-			open(map, tokens[0]);
+			open(map, subject);
 			continue;
 		} else if (str_compare(command, "get")) {
-			get(map, tokens[0]);
+			get(map, subject);
 			continue;
 		} else if (str_compare(command, "drop")) {
-			drop(map, tokens[0]);
+			drop(map, subject);
 			continue;
 		} else if (str_compare(command, "use")) {
-			use(map, tokens);
+			use(map, subject, preposition, object);
 			continue;
 		} else if (str_compare(command, "inv") ||
 			   str_compare(command, "inventory")) {
@@ -171,32 +314,22 @@ run_repl(Map &map)
 void
 look(Map &map)
 {
-	vector<string> args;
-	look(map, args);
+	string empty = "";
+	look(map, empty);
 }
 
 void
-look(Map &map, vector<string> args)
+look(Map &map, string subject)
 {
 	/* If we look at the room */
-	if (args.size() == 0) {
+	if (subject.length() == 0) {
 		map.get_current_room().look();
-		return;
-	}
-
-	/* Get rid of "at" */
-	if (str_compare(args[0], "at")) {
-		args.erase(args.begin());
-	}
-
-	if (args.size() == 0) {
-		cout << "Look at what?" << endl;
 		return;
 	}
 
 	/* Look at an item in our inventory */
 	for (auto i : map.get_item_list()) {
-		if (str_compare(args[0], i.first)) {
+		if (str_compare(subject, i.first)) {
 			cout << map.get_item_ptr(i.second)->get_description()
 			     << endl;
 			return;
@@ -206,7 +339,7 @@ look(Map &map, vector<string> args)
 	/* Look at an item in the room */
 	for (auto i : map.get_current_room().get_item_list()) {
 
-		if (str_compare(args[0], i.first)) {
+		if (str_compare(subject, i.first)) {
 			cout << map.get_current_room().get_item_ptr(i.second)
 				->get_description() << endl;
 			return;
@@ -220,9 +353,9 @@ look(Map &map, vector<string> args)
 void
 move(Map &map, string direction)
 {
-	vector<string> args;
+	string empty = "";
 	if (map.use_exit(direction)) {
-		look(map, args);
+		look(map, empty);
 	} else
 		cout << "You can't go that way." << endl;
 }
@@ -274,9 +407,9 @@ drop(Map &map, string item_name)
 }
 
 void
-use(Map &map, vector<string> args)
+use(Map &map, string subject, string preposition, string object)
 {
-	if (args.size() == 0) {
+	if (subject.length() == 0) {
 		cout << "Do what with what?" << endl;
 		return;
 	}
@@ -285,8 +418,8 @@ use(Map &map, vector<string> args)
 
 	/* Everything else requires we have the item or that the item is in the
 	 * room.  We take the item if it's in the room. */
-	if (map.get_current_room().has_item(args[0])) {
-		if (map.get_item(args[0]))
+	if (map.get_current_room().has_item(subject)) {
+		if (map.get_item(subject))
 			cout << "(Taken)" << endl;
 		else {
 			cout << "You can't pick that up." << endl;
@@ -295,17 +428,77 @@ use(Map &map, vector<string> args)
 	}
 
 	/* Item is either in our inventory or not at this point. */
-	if (! map.has_item(args[0])) {
+	if (! map.has_item(subject)) {
 		cout << "You don't have that." << endl;
 		return;
 	}
 
 	/* Room specific item stuff goes here, i.e. card */
+	if (str_compare(subject, "blue card")) {
+		if (preposition.length() == 0) {
+			cout << "How do you want to use that?" << endl;
+			return;
+		} else if (str_compare(preposition, "in")) {
+			if (str_compare(object, "slot")) {
+				if (map.get_current_location() == 2) {
+					map.relocate_player(4);
+					look(map);
+					return;
+				} else if (map.get_current_location() == 3 ||
+					   map.get_current_location() == 4 ||
+					   map.get_current_location() == 6) {
+					map.relocate_player(1);
+					look(map);
+					return;
+				}
+			} else {
+				cout << "I don't see how that would help."
+				     << endl;
+				return;
+			}
+		} else {
+			cout << "I don't understand that." << endl;
+			return;
+		}
+	}
+
+	if (str_compare(subject, "red card")) {
+		if (preposition.length() == 0) {
+			cout << "How do you want to use that?" << endl;
+			return;
+		} else if (str_compare(preposition, "in")) {
+			if (str_compare(object, "slot")) {
+				if (map.get_current_location() == 3) {
+					map.relocate_player(6);
+					look(map);
+					return;
+				} else if (map.get_current_location() == 2 ||
+					   map.get_current_location() == 4 ||
+					   map.get_current_location() == 6) {
+					map.relocate_player(1);
+					look(map);
+					return;
+				}
+			} else {
+				cout << "I don't see how that would help."
+				     << endl;
+				return;
+			}
+		} else {
+			cout << "I don't understand that." << endl;
+			return;
+		}
+	}
 
 	/* Non-room specific item stuff goes here */
 
 	/* Item fail message */
-	map.get_item_ptr(map.get_item_num_by_name(args[0]))->use();
+	map.get_item_ptr(map.get_item_num_by_name(subject))->use();
+}
+
+void
+put(Map &map_obj, string subject, string preposition, string object)
+{
 }
 
 void

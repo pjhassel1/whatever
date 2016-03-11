@@ -8,6 +8,7 @@
 #include <iostream>
 #include "../include/items.h"
 #include "../include/utility.h"
+#include "../include/config.h"
 
 
 using std::string;
@@ -88,11 +89,28 @@ Item::is_item_name(const string &token)
 	string item_name = str_lc(token);
 	bool retval = false;
 
+#ifdef DEBUG
+	std::cout << "DEBUG (1): comparing " << item_name
+		  << " and " << name << std::endl;
+#endif
+	if (str_compare(name, item_name)) {
+		return true;
+	}
 	for (auto s : aliases) {
+#ifdef DEBUG
+		std::cout << "DEBUG (2): comparing " << item_name
+			  << " and " << s << std::endl;
+#endif
 		if (str_compare(s, item_name)) {
+#ifdef DEBUG
+			std::cout << " found" << std::endl;
+#endif
 			retval = true;
 			break;
 		}
+#ifdef DEBUG
+		std::cout << " not found" << std::endl;
+#endif
 	}
 
 	return retval;

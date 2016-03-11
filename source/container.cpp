@@ -109,17 +109,24 @@ Container::has_item(const int item_num)
 }
 
 bool
-Container::has_item(const string iname)
+Container::has_item(const string item_name)
 {
-	string item_name = iname;
-	str_lc_ref(item_name);
+	string iname = item_name;
+	str_lc_ref(iname);
 
-	int item_num = get_item_num_by_name(item_name);
+	int item_num = get_item_num_by_name(iname);
 
-	if (item_num == -1)
+	if (item_num == -1) {
+#ifdef DEBUG
+		cout << "DEBUG: cannot find " << iname << endl;
+#endif
 		return false;
-	else
+	} else {
+#ifdef DEBUG
+		cout << "DEBUG: found " << iname << endl;
+#endif
 		return has_item(item_num);
+	}
 }
 
 Item*
