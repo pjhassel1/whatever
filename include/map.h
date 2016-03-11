@@ -76,8 +76,8 @@ public:
 	int get_current_location();
 
 	/* Mutators */
-	void set_current_location(); /* Does not do sanity checks -
-					use get_current_room */
+	void set_current_location(int location); /* Does not do sanity checks -
+						  * use get_current_room */
 private:
 	int current_location;
 	std::unordered_map<int, Room> rooms;

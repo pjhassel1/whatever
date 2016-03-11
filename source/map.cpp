@@ -111,11 +111,11 @@ Map::add_exit_to_room(int room_num, string exit_name, int dest)
 int
 Map::get_current_location()
 {
-	return 0;
+	return current_location;
 }
 
 void
-Map::set_current_location()
+Map::set_current_location(int loc)
 {
-
+	current_location = loc;
 }

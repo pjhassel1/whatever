@@ -144,9 +144,15 @@ run_repl(Map &map)
 				subject = tokens[0];
 				tokens.erase(tokens.begin());
 			}
-		} else {
+		} else if (tokens.size() == 1) {
 			subject = tokens[0];
 			tokens.erase(tokens.begin());
+		}
+
+		/* If the subject is an item, use the item name */
+		if (map.has_item(subject)) {
+			subject = map.get_item_ptr(
+				map.get_item_num_by_name(subject))->get_name();
 		}
 
 		/* Find the preposition */
@@ -196,13 +202,6 @@ run_repl(Map &map)
 
 			if (! map.has_item(subject)) {
 				cout << "You don't have that." << endl;
-				continue;
-			}
-
-			if (preposition.length() > 0 &&
-			    object.length() == 0) {
-				cout << "Put " << subject << preposition
-				     << " what?" << endl;
 				continue;
 			}
 
@@ -355,6 +354,9 @@ move(Map &map, string direction)
 {
 	string empty = "";
 	if (map.use_exit(direction)) {
+#ifdef DEBUG
+		cout << "Room #" << map.get_current_location() << " ";
+#endif
 		look(map, empty);
 	} else
 		cout << "You can't go that way." << endl;
@@ -409,6 +411,9 @@ drop(Map &map, string item_name)
 void
 use(Map &map, string subject, string preposition, string object)
 {
+#ifdef DEBUG
+	cout << "DEBUG: Enter use()" << endl;
+#endif
 	if (subject.length() == 0) {
 		cout << "Do what with what?" << endl;
 		return;
@@ -435,6 +440,9 @@ use(Map &map, string subject, string preposition, string object)
 
 	/* Room specific item stuff goes here, i.e. card */
 	if (str_compare(subject, "blue card")) {
+#ifdef DEBUG
+		cout << "DEBUG: Using blue card" << endl;
+#endif
 		if (preposition.length() == 0) {
 			cout << "How do you want to use that?" << endl;
 			return;
@@ -449,6 +457,10 @@ use(Map &map, string subject, string preposition, string object)
 					   map.get_current_location() == 6) {
 					map.relocate_player(1);
 					look(map);
+					return;
+				} else {
+					cout << "I don't see a slot here."
+					     << endl;
 					return;
 				}
 			} else {
@@ -478,6 +490,10 @@ use(Map &map, string subject, string preposition, string object)
 					map.relocate_player(1);
 					look(map);
 					return;
+				} else {
+					cout << "I don't see a slot here."
+					     << endl;
+					return;
 				}
 			} else {
 				cout << "I don't see how that would help."
@@ -497,8 +513,15 @@ use(Map &map, string subject, string preposition, string object)
 }
 
 void
-put(Map &map_obj, string subject, string preposition, string object)
+put(Map &map, string subject, string preposition, string object)
 {
+	if (str_compare(subject, "blue card") ||
+	    str_compare(subject, "red card")) {
+		use(map, subject, preposition, object);
+		return;
+	}
+
+	cout << "I dont' understand" << endl;
 }
 
 void

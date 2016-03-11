@@ -90,16 +90,22 @@ Item::is_item_name(const string &token)
 	bool retval = false;
 
 #ifdef DEBUG
-	std::cout << "DEBUG (1): comparing " << item_name
-		  << " and " << name << std::endl;
+	std::cout << "DEBUG (is_item_name()): comparing " << item_name
+		  << " and " << name << ":";
 #endif
 	if (str_compare(name, item_name)) {
+#ifdef DEBUG
+		std::cout << " found" << std::endl;
+#endif
 		return true;
 	}
+#ifdef DEBUG
+		std::cout << " not found" << std::endl;
+#endif
 	for (auto s : aliases) {
 #ifdef DEBUG
-		std::cout << "DEBUG (2): comparing " << item_name
-			  << " and " << s << std::endl;
+		std::cout << "DEBUG (is_item_name()): comparing " << item_name
+			  << " and " << s << ":";
 #endif
 		if (str_compare(s, item_name)) {
 #ifdef DEBUG
